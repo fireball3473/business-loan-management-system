@@ -1,6 +1,6 @@
 # Frontend
 
-This project was generated using [Angular CLI](https:
+This project was generated using [Angular CLI]
 
 ## Development server
 
