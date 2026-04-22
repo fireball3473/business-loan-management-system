@@ -131,3 +131,4 @@ C:\Users\canat\OneDrive\Masaüstü\Intern\Small Business Loan and Collections Ma
 C:\Users\canat\OneDrive\Masaüstü\Intern\Small Business Loan and Collections Management Module\backend\obj\Debug\net10.0\LoanApp.pdb
 C:\Users\canat\OneDrive\Masaüstü\Intern\Small Business Loan and Collections Management Module\backend\obj\Debug\net10.0\LoanApp.genruntimeconfig.cache
 C:\Users\canat\OneDrive\Masaüstü\Intern\Small Business Loan and Collections Management Module\backend\obj\Debug\net10.0\ref\LoanApp.dll
+C:\Users\canat\OneDrive\Masaüstü\Intern\Small Business Loan and Collections Management Module\backend\obj\Debug\net10.0\LoanApp.sourcelink.json
