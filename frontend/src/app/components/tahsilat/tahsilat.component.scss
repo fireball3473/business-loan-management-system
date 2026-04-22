@@ -1,0 +1,140 @@
+@use "sass:color";
+
+.container {
+  max-width: 1000px;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+h3 {
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 24px;
+    background: #4f46e5;
+    border-radius: 4px;
+  }
+}
+
+.input-group {
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+
+  input {
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    
+    &:focus {
+      border-color: #4f46e5;
+      box-shadow: none;
+    }
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    background: #4f46e5;
+    border: none;
+    
+    &:hover {
+      background: #4338ca;
+    }
+  }
+}
+
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+  
+  thead th {
+    background-color: #f8fafc;
+    border-bottom: 2px solid #f1f5f9;
+    color: #64748b;
+    padding: 1rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  tbody td {
+    padding: 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+  }
+
+  .table-info {
+    background-color: rgba(79, 70, 229, 0.05);
+    border-left: 4px solid #4f46e5;
+  }
+}
+
+.text-danger {
+  color: #ef4444 !important;
+  font-weight: 700;
+}
+
+.card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  margin-top: 3rem;
+  
+  .card-body {
+    padding: 2rem;
+  }
+
+  h5 {
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .form-select, .form-control {
+    background-color: white;
+    border: 1.5px solid #e2e8f0;
+    padding: 0.75rem;
+    
+    &:focus {
+      border-color: #4f46e5;
+    }
+  }
+
+  .btn-success {
+    height: 100%;
+    padding: 0.75rem;
+    font-weight: 700;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+    }
+  }
+}

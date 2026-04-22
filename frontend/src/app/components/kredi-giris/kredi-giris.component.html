@@ -1,0 +1,90 @@
+<!-- Kredi Tanımlama Formunun bulunduğu ana panel -->
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Yeni Kredi Tanımlama ve Faiz Hesaplama</h5>
+    </div>
+    <div class="card-body">
+        <!-- Kredi bilgilerini toplayan Reactive Form -->
+        <form [formGroup]="krediForm" (ngSubmit)="kaydet()">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="vknInput" class="form-label fw-bold">VKN (Vergi Kimlik No)</label>
+                    <div class="input-group">
+                        <input id="vknInput" type="text" class="form-control" formControlName="vkn" (input)="vknSorgula()"
+                            placeholder="10 haneli VKN girin">
+                        @if (loading) {
+                        <span class="input-group-text">
+                            <span class="spinner-border spinner-border-sm"></span>
+                        </span>
+                        }
+                    </div>
+                    <div class="mt-2">
+                        @if (musteriUnvan) {
+                        <span [class]="musteriUnvan === 'Müşteri bulunamadı!' ? 'text-danger' : 'text-success fw-bold'">
+                            {{ musteriUnvan }}
+                        </span>
+                        }
+                        <p>VKN Test Bilgisi: 1111111111</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="krediTuruSelect" class="form-label fw-bold">Kredi Türü</label>
+                    <select id="krediTuruSelect" class="form-select" formControlName="krediTuru">
+                        <option value="Ticari">Ticari Kredi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <!-- Kredi tutarı girilecek alan -->
+                    <label for="anaParaInput" class="form-label">Ana Para (Kredi Tutarı)</label>
+                    <input id="anaParaInput" type="number" class="form-control" formControlName="anaPara">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="dovizCinsiSelect" class="form-label">Döviz Cinsi</label>
+                    <select id="dovizCinsiSelect" class="form-select" formControlName="dovizCinsi">
+                        <option value="TRY">TRY</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="odemeTipiSelect" class="form-label">Ödeme Tipi</label>
+                    <select id="odemeTipiSelect" class="form-select" formControlName="odemeTipi">
+                        <option value="Aylık">Aylık</option>
+                        <option value="Yıllık">Yıllık</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="vadeSayisiInput" class="form-label">Vade Sayısı</label>
+                    <input id="vadeSayisiInput" type="number" class="form-control" formControlName="vadeSayisi">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="faizOraniInput" class="form-label">Dönemsel Faiz Oranı (%)</label>
+                    <input id="faizOraniInput" type="number" class="form-control" formControlName="faizOrani">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-3 bg-light border rounded text-center">
+                        <span class="text-muted d-block small">Toplam Borç (Hesaplanan)</span>
+                        <h4 class="text-primary mb-0">{{ hesaplananToplamBorc | number:'1.2-2' }} {{
+                            krediForm.get('dovizCinsi')?.value }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="text-end">
+                <!-- Veriler doğruysa ve müşteri bulunmuşsa butonu aktifleştir -->
+                <button type="submit" class="btn btn-success btn-lg"
+                    [disabled]="!krediForm.valid || musteriUnvan === 'Müşteri bulunamadı!' || musteriUnvan === ''">
+                    Krediyi Onayla ve Tanımla
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

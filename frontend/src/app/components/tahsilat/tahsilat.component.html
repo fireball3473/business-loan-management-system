@@ -1,0 +1,104 @@
+<!-- Taksit ödeme / tahsilat işlemi ana konteyneri -->
+<div class="container mt-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Müşteri Borç Sorgulama</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="10 haneli VKN girin"
+                            [(ngModel)]="vknSorgu" [disabled]="loading">
+                        <button class="btn btn-primary" (click)="kredileriGetir()" [disabled]="loading">
+                            @if (!loading) {
+                            <span>Kredileri Listele</span>
+                            }
+                            @if (loading) {
+                            <span>
+                                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                                <output aria-live="polite">Yükleniyor...</output>
+                            </span>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Eğer aratılan VKN'nin aktif kredisi varsa tablo halinde listelenir -->
+    @if (krediler.length > 0) {
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">Aktif Krediler (Kalan Borcu Olanlar)</div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Kredi Türü</th>
+                        <th>Döviz</th>
+                        <th>Ana Para</th>
+                        <th>Toplam Borç</th>
+                        <th>Kalan Borç</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (k of krediler; track k.krediId) {
+                    <tr [class.table-info]="seciliKredi?.krediId === k.krediId">
+                        <td>{{ k.krediTuru }}</td>
+                        <td>{{ k.dovizCinsi }}</td>
+                        <td>{{ k.anaPara | number:'1.2-2' }}</td>
+                        <td>{{ k.toplamBorc | number:'1.2-2' }}</td>
+                        <td class="text-danger fw-bold">{{ k.kalanBorc | number:'1.2-2' }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success" (click)="krediSec(k)">Tahsilat Yap</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+
+    <!-- Yukarıdaki tablodan 'Tahsilat Yap' butonuna basılarak bir kredi seçildiyse bu blok açılır -->
+    @if (seciliKredi) {
+    <div class="card mt-4 border-success shadow">
+        <div class="card-header bg-success text-white">Tahsilat İşlemi</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="hesapSecimi" class="form-label">Ödeme Yapılacak Hesap</label>
+                    @if (loading) {
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <output aria-live="polite">Hesaplar yükleniyor...</output>
+                    </div>
+                    }
+                    @if (!loading) {
+                    <select id="hesapSecimi" class="form-select" [(ngModel)]="seciliHesapId"
+                        [disabled]="loading">
+                        <option [value]="null">Hesap Seçiniz...</option>
+                        @for (h of mevduatHesaplari; track h.hesapId) {
+                        <option [value]="h.hesapId">
+                            {{ h.ibanNo }} (Bakiye: {{ h.bakiye | number:'1.2-2' }} {{ h.dovizCinsi }})
+                        </option>
+                        }
+                    </select>
+                    }
+                </div>
+                <div class="col-md-4">
+                    <label for="tahsilatTutariInput" class="form-label">Tahsil Edilecek Tutar</label>
+                    <input id="tahsilatTutariInput" type="number" class="form-control" [(ngModel)]="tahsilatTutari">
+                    <small class="text-muted">Max: {{ seciliKredi.kalanBorc }}</small>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" (click)="odemeYap()"
+                        [disabled]="!seciliHesapId || tahsilatTutari <= 0">
+                        İşlemi Tamamla (Transaction)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

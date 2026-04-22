@@ -1,0 +1,48 @@
+<!-- Giriş yapma arayüzünün tamamını kapsayan ana konteyner -->
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+      </div>
+      <h2>Finans Yönetimi</h2>
+      <p>Kurumsal Finans & Tahsilat Portalı</p>
+    </div>
+
+    <!-- FormGroup bağlı giriş formu; loginForm Reactive objesi onSubmit fonksiyonunu tetikler -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="kullaniciAdiInput">Kullanıcı Adı</label>
+        <input type="text" id="kullaniciAdiInput" formControlName="kullaniciAdi" class="form-control" placeholder="Örn: admin"
+          [class.is-invalid]="loginForm.get('kullaniciAdi')?.invalid && loginForm.get('kullaniciAdi')?.touched">
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="sifreInput">Şifre</label>
+        <input type="password" id="sifreInput" formControlName="sifre" class="form-control" placeholder="••••••"
+          [class.is-invalid]="loginForm.get('sifre')?.invalid && loginForm.get('sifre')?.touched">
+      </div>
+
+      <!-- Hatalı giriş yapıldığında Component üzerinden gelen mesajın gösterildiği div blok -->
+      @if (errorMessage) {
+      <div class="alert alert-danger mb-4">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <!-- Giriş butonu, form boşken veya API isteği yüklenirken (loading) engellenir -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || loading">
+        @if (loading) {
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        Sisteme Giriş Yap
+      </button>
+    </form>
+    
+    <div class="login-footer">
+      <p>Test Bilgileri: Kullanıcı Adı: <strong>admin</strong> | Şifre: <strong>123456</strong></p>
+    </div>
+  </div>
+</div>
