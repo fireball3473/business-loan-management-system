@@ -4,9 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-/**
- * Kullanıcı giriş-çıkış işlemlerini yöneten ve JWT bazlı yetkilendirme sağlayan kimlik doğrulama servisi.
- */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +17,7 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
 
-  /** Kullanıcı adı ve şifresi ile backend'e giriş isteği atar, başarılıysa token döner ve local storage'a kaydeder */
+
   login(credentials: { kullaniciAdi: string, sifre: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials)
       .pipe(
@@ -35,7 +33,7 @@ export class AuthService {
       );
   }
 
-  /** Kullanıcıyı sistemden çıkarır (token'ı yerel depolamadan siler ve ana sayfaya yönlendirir) */
+
   logout() {
     if (globalThis.window !== undefined && globalThis.localStorage) {
       localStorage.removeItem('token');
@@ -45,7 +43,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  /** Tarayıcı depolamasındaki geçerli JWT token'ını getirir (API çağrıları için interceptor'lar kullanır) */
+
   getToken(): string | null {
     if (typeof globalThis !== 'undefined' && globalThis.localStorage) {
       return localStorage.getItem('token');

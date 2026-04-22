@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-/// <summary>
-/// Müşterilerin kredi borcu ödemeleri (tahsilat işlemleri) ve hesap sorgulamalarını yöneten kontrolcü.
-/// </summary>
+
+
+
 public class TahsilatController : ControllerBase
 {
     private readonly FinansDbContext _context;
@@ -17,9 +17,9 @@ public class TahsilatController : ControllerBase
         _context = context;
     }
 
-    /// <summary>
-    /// Verilen VKN'ye ait henüz kapanmamış (kalan borcu 0'dan büyük olan) aktif kredileri getirir.
-    /// </summary>
+    
+    
+    
     [HttpGet("aktif-krediler/{vkn}")]
     public async Task<IActionResult> GetActiveLoans(string vkn)
     {
@@ -40,9 +40,9 @@ public class TahsilatController : ControllerBase
         return Ok(krediler);
     }
 
-    /// <summary>
-    /// Seçilen krediye sahip olan müşterinin, ödeme yapabileceği mevduat hesaplarını listeler.
-    /// </summary>
+    
+    
+    
     [HttpGet("musteri-hesaplari/{krediId}")]
     public async Task<IActionResult> GetCustomerAccounts(int krediId)
     {
@@ -57,10 +57,10 @@ public class TahsilatController : ControllerBase
         return Ok(hesaplar);
     }
 
-    /// <summary>
-    /// Seçilen mevduat hesabından, ilgili kredinin borcu için tahsilat (ödeme) işlemini gerçekleştirir.
-    /// İşlemi transaction kullanarak güvenli şekilde yapar: bakiyeyi düşürür, borcu azaltır ve log atar.
-    /// </summary>
+    
+    
+    
+    
     [HttpPost("tahsilat-yap")]
     public async Task<IActionResult> MakePayment([FromBody] TahsilatIslemDto dto)
     {
@@ -93,9 +93,9 @@ public class TahsilatController : ControllerBase
                     TahsilatTutari = dto.TahsilatTutari,
                     IslemTarihi = DateTime.UtcNow
                 };
-                _context.T_Tahsilatlar.Add(log); // RAM'e kaydeder
+                _context.T_Tahsilatlar.Add(log); 
 
-                await _context.SaveChangesAsync(); // Veritabanına kaydeder
+                await _context.SaveChangesAsync(); 
 
                 await transaction.CommitAsync();
 
@@ -104,7 +104,7 @@ public class TahsilatController : ControllerBase
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                return StatusCode(500, "İşlem sırasında bir hata oluştu: " + ex.Message); // Internal server error
+                return StatusCode(500, "İşlem sırasında bir hata oluştu: " + ex.Message); 
             }
         }
     }

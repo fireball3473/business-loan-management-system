@@ -1,6 +1,6 @@
 using BCrypt.Net;
 
-// Seeder: Rastgele veriler yerleştirmesini sağlayan araç
+
 public static class DbSeeder
 {
     public static void Seed(FinansDbContext context)

@@ -1,17 +1,15 @@
-<!-- Kredi Tanımlama Formunun bulunduğu ana panel -->
 <div class="card shadow-sm mt-4">
     <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Yeni Kredi Tanımlama ve Faiz Hesaplama</h5>
     </div>
     <div class="card-body">
-        <!-- Kredi bilgilerini toplayan Reactive Form -->
         <form [formGroup]="krediForm" (ngSubmit)="kaydet()">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="vknInput" class="form-label fw-bold">VKN (Vergi Kimlik No)</label>
                     <div class="input-group">
-                        <input id="vknInput" type="text" class="form-control" formControlName="vkn" (input)="vknSorgula()"
-                            placeholder="10 haneli VKN girin">
+                        <input id="vknInput" type="text" class="form-control" formControlName="vkn"
+                            (input)="vknSorgula()" placeholder="10 haneli VKN girin">
                         @if (loading) {
                         <span class="input-group-text">
                             <span class="spinner-border spinner-border-sm"></span>
@@ -38,7 +36,6 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <!-- Kredi tutarı girilecek alan -->
                     <label for="anaParaInput" class="form-label">Ana Para (Kredi Tutarı)</label>
                     <input id="anaParaInput" type="number" class="form-control" formControlName="anaPara">
                 </div>
@@ -79,7 +76,6 @@
 
             <hr>
             <div class="text-end">
-                <!-- Veriler doğruysa ve müşteri bulunmuşsa butonu aktifleştir -->
                 <button type="submit" class="btn btn-success btn-lg"
                     [disabled]="!krediForm.valid || musteriUnvan === 'Müşteri bulunamadı!' || musteriUnvan === ''">
                     Krediyi Onayla ve Tanımla

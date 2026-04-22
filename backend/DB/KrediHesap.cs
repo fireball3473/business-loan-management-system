@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class KrediHesap // Kredi hesap tablosunun yapısını tanıtır. 
+public class KrediHesap 
 {
-    // Get set özelliklere kolayca erişmeni ve değer atayabilmeyi sağlar.
+    
     [Key]
     public int KrediId { get; set; }
 

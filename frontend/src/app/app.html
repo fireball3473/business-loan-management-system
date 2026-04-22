@@ -1,8 +1,6 @@
-<!-- Kullanıcı giriş yapmışsa (isLoggedIn$ true ise) gösterilecek olan üst navigasyon çubuğu -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4" *ngIf="isLoggedIn$ | async">
   <div class="container d-flex justify-content-between">
-    
-    <!-- Sol Kısım: Uygulama adı (logo) ve sayfa yönlendirme (routing) linkleri -->
+
     <div class="d-flex align-items-center">
       <a class="navbar-brand" href="#">Finans Yönetim Sistemi</a>
       <div class="navbar-nav ms-4">
@@ -11,7 +9,6 @@
       </div>
     </div>
 
-    <!-- Sağ Kısım: Aktif kullanıcı karşılama mesajı ve güvenli çıkış (logout) butonu -->
     <div class="d-flex align-items-center">
       <span class="text-light me-3 small">Hoşgeldin, {{ kullaniciAdSoyad() }}</span>
       <button class="btn btn-sm btn-outline-light" (click)="cikisYap()">Çıkış Yap</button>
@@ -19,7 +16,6 @@
   </div>
 </nav>
 
-<!-- Yönlendirilen sayfaların (Angular route bileşenlerinin) dinamik olarak yükleneceği ana alan -->
 <div class="container">
   <router-outlet></router-outlet>
 </div>

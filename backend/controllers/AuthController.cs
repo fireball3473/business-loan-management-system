@@ -5,9 +5,9 @@ using System.Security.Claims;
 using System.Text;
 using BCrypt.Net;
 
-/// <summary>
-/// Kullanıcı giriş işlemlerini (Authentication) ve JWT (JSON Web Token) üretimini sağlayan kontrolcü.
-/// </summary>
+
+
+
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -21,9 +21,9 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
-    /// <summary>
-    /// Kullanıcı adı ve şifresi ile sisteme giriş yapar. Doğrulanırsa güvenlik token'ı (JWT) döner.
-    /// </summary>
+    
+    
+    
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDto request)
     {

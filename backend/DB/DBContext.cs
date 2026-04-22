@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-/// <summary>
-/// Veritabanı bağlantısı ve Entity Framework Core tablolarını temsil eden ana bağlam (Context) sınıfı.
-/// </summary>
-public class FinansDbContext : DbContext // DBSet veritabanındaki bir tabloyu temsil eder.
+
+
+
+public class FinansDbContext : DbContext 
 {
     public FinansDbContext(DbContextOptions<FinansDbContext> options) : base(options) { }
 
@@ -14,20 +14,20 @@ public class FinansDbContext : DbContext // DBSet veritabanındaki bir tabloyu t
     public DbSet<Tahsilat> T_Tahsilatlar { get; set; }
     public DbSet<Kullanici> T_Kullanicilar { get; set; }
 
-    /// <summary>
-    /// Veritabanı tabloları oluşturulurken uygulanacak konfigürasyonlar (örn: VKN alanının unique olması).
-    /// </summary>
+    
+    
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Musteri>()
             .HasIndex(m => m.VKN)
-            .IsUnique(); // Aynı anda birden fazla kayıt oluşturulmasını engeller.
+            .IsUnique(); 
 
         base.OnModelCreating(modelBuilder);
     }
 }
 
-public class FinansDbContextFactory : IDesignTimeDbContextFactory<FinansDbContext> // Migration oluştururken DBContext örneğini oluşturur ve Migration'ları yönetir.
+public class FinansDbContextFactory : IDesignTimeDbContextFactory<FinansDbContext> 
 {
     public FinansDbContext CreateDbContext(string[] args)
     {

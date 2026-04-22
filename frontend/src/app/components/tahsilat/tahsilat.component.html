@@ -1,4 +1,3 @@
-<!-- Taksit ödeme / tahsilat işlemi ana konteyneri -->
 <div class="container mt-4">
     <div class="card shadow-sm mb-4">
         <div class="card-body">
@@ -6,8 +5,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="10 haneli VKN girin"
-                            [(ngModel)]="vknSorgu" [disabled]="loading">
+                        <input type="text" class="form-control" placeholder="10 haneli VKN girin" [(ngModel)]="vknSorgu"
+                            [disabled]="loading">
                         <button class="btn btn-primary" (click)="kredileriGetir()" [disabled]="loading">
                             @if (!loading) {
                             <span>Kredileri Listele</span>
@@ -25,7 +24,6 @@
         </div>
     </div>
 
-    <!-- Eğer aratılan VKN'nin aktif kredisi varsa tablo halinde listelenir -->
     @if (krediler.length > 0) {
     <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">Aktif Krediler (Kalan Borcu Olanlar)</div>
@@ -60,7 +58,6 @@
     </div>
     }
 
-    <!-- Yukarıdaki tablodan 'Tahsilat Yap' butonuna basılarak bir kredi seçildiyse bu blok açılır -->
     @if (seciliKredi) {
     <div class="card mt-4 border-success shadow">
         <div class="card-header bg-success text-white">Tahsilat İşlemi</div>
@@ -75,8 +72,7 @@
                     </div>
                     }
                     @if (!loading) {
-                    <select id="hesapSecimi" class="form-select" [(ngModel)]="seciliHesapId"
-                        [disabled]="loading">
+                    <select id="hesapSecimi" class="form-select" [(ngModel)]="seciliHesapId" [disabled]="loading">
                         <option [value]="null">Hesap Seçiniz...</option>
                         @for (h of mevduatHesaplari; track h.hesapId) {
                         <option [value]="h.hesapId">

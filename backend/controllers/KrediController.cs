@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-/// <summary>
-/// Kredi onay ve müşteri sorgulama işlemlerinden sorumlu kontrolcü.
-/// </summary>
+
+
+
 public class KrediController : ControllerBase
 {
     private readonly FinansDbContext _context;
@@ -17,9 +17,9 @@ public class KrediController : ControllerBase
         _context = context;
     }
 
-    /// <summary>
-    /// Verilen VKN'ye (Vergi Kimlik Numarası) göre müşteriyi veritabanında arar ve DTO olarak döner.
-    /// </summary>
+    
+    
+    
     [HttpGet("musteri-ara/{vkn}")]
     public async Task<IActionResult> GetMusteriByVkn(string vkn)
     {
@@ -32,10 +32,10 @@ public class KrediController : ControllerBase
         return Ok(musteri);
     }
 
-    /// <summary>
-    /// Müşterinin kredi başvurusu onaylandığında yeni bir kredi hesabı oluşturur ve veritabanına ekler.
-    /// Faiz oranına ve vade sayısına göre toplam borcu otomatik hesaplar.
-    /// </summary>
+    
+    
+    
+    
     [HttpPost("kredi-olustur")]
     public async Task<IActionResult> KrediOlustur([FromBody] KrediOlusturDto dto)
     {

@@ -1,6 +1,6 @@
-/// <summary>
-/// Kullanıcının kredi formunda doldurduğu verileri backend'e taşımak için kullanılan Data Transfer Object.
-/// </summary>
+
+
+
 public class KrediOlusturDto
 {
     public required string VKN { get; set; }

@@ -7,12 +7,9 @@ import { FinansService } from '../../services/finans.service';
     selector: 'app-tahsilat',
     templateUrl: './tahsilat.component.html',
     styleUrls: ['./tahsilat.component.scss'],
-    imports: [CommonModule, FormsModule]
+    imports: [CommonModule, FormsModule, DecimalPipe]
 })
-/**
- * Kredi tahsilat (ödeme) işlemlerinin gerçekleştirildiği arayüz bileşeni.
- * Müşteriye ait açık krediler ile ödeme yapılabilecek mevcut mevduat hesaplarını listeler.
- */
+
 export class TahsilatComponent {
     vknSorgu: string = '';
     krediler: any[] = [];
@@ -26,9 +23,9 @@ export class TahsilatComponent {
 
     constructor(private readonly finansService: FinansService, private readonly changeDetectorRef: ChangeDetectorRef) { }
 
-    /** VKN'si girilen tam uzunluktaki (10 haneli) müşterinin, henüz kapanmamış borçlarını (aktif krediler) arar */
+
     kredileriGetir() {
-        const vkn = this.vknSorgu.trim(); 
+        const vkn = this.vknSorgu.trim();
 
         if (vkn.length === 10) {
             this.loading = true;
@@ -49,14 +46,14 @@ export class TahsilatComponent {
         }
     }
 
-    /** Kullanıcı mevcut kredilerden birini seçtiğinde, ödemenin tahsil edilebileceği müşteri hesaplarını API'den çeker */
+
     krediSec(kredi: any) {
         this.seciliKredi = kredi;
         this.tahsilatTutari = kredi.kalanBorc;
         this.loading = true;
 
         this.finansService.getAccounts(kredi.krediId).subscribe({
-            next: (res: any[]) => { 
+            next: (res: any[]) => {
                 this.mevduatHesaplari = res;
                 this.loading = false;
                 this.changeDetectorRef.detectChanges();
@@ -68,11 +65,11 @@ export class TahsilatComponent {
         });
     }
 
-    /** İşlem onayından sonra seçili hesap numarası ve tutar üstünden tahsilatı gerçekleştirir */
+
     odemeYap() {
         if (!this.seciliHesapId || this.tahsilatTutari <= 0) return;
 
-        const data = { 
+        const data = {
             krediId: this.seciliKredi.krediId,
             hesapId: this.seciliHesapId,
             tahsilatTutari: this.tahsilatTutari

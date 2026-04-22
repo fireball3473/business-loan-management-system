@@ -10,17 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
   imports: [CommonModule, ReactiveFormsModule]
 })
-/**
- * Kullanıcıların sisteme güvenli giriş (login) yapmasını sağlayan arayüz bileşeni.
- */
+
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
   loading: boolean = false;
 
   constructor(
-    private readonly fb: FormBuilder, 
-    private readonly authService: AuthService, 
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -30,12 +28,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.getToken()) { 
+    if (this.authService.getToken()) {
       this.router.navigate(['/kredi-giris']);
     }
   }
 
-  /* Kullanıcının girdiği kimlik bilgileri geçerliyse, auth servisine yönlendirerek token bazlı oturum açma işlemini tetikler */
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading = true;
